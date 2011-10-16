@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -21,7 +22,7 @@ vector<device_t *> getdevices() {
     string buffer;
     while (fgets(cbuffer, 1024, fp) != NULL)
         buffer.append(cbuffer);
-    fclose(fp);
+    pclose(fp);
     istringstream ibuffer (buffer,istringstream::in);
 
     string line;

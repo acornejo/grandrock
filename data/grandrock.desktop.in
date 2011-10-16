@@ -6,4 +6,4 @@ Exec=grandrock
 Terminal=false
 StartupNotify=false
 Type=Application
-Categories=GNOME;GTK;
+Categories=GNOME;GTK;Settings;HardwareSettings;

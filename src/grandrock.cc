@@ -1,11 +1,8 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include <config.h>
 #include <gtk/gtk.h>
-#include <gdk/gdk.h>
-#include <gdk/gdkkeysyms.h>
-#include <glib/gstdio.h>
+// #include <gdk/gdk.h>
+// #include <gdk/gdkkeysyms.h>
+// #include <glib/gstdio.h>
 
 #include "xrandr-query.h"
 

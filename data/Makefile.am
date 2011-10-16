@@ -7,7 +7,19 @@ svgicon_DATA = grandrock.svg
 
 install-data-hook: update-icon-cache
 uninstall-hook: update-icon-cache
+
+gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+
 update-icon-cache:
+	@-if test -z "$(datadir)/icons/hicolor"; then \
+		echo "Updating Gtk icon cache."; \
+		$(gtk_update_icon_cache); \
+	else \
+		echo "*** Icon cache not updated.  After (un)install, run this:"; \
+		for theme in $(public_icons_themes); do \
+			echo "***   $(gtk_update_icon_cache) $(datadir)/icons/$$theme"; \
+		done; \
+	fi
 	gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 
 EXTRA_DIST = \
