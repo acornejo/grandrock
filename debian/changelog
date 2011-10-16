@@ -1,3 +1,9 @@
+grandrock (0.1-1ubuntu2) oneiric; urgency=low
+
+  * Fixed dependencies 
+
+ -- Alex Cornejo <acornejo@gmail.com>  Sun, 16 Oct 2011 17:01:40 -0400
+
 grandrock (0.1-1ubuntu1) oneiric; urgency=low
 
   * Changed autogen to use --copy (for launchpad)
