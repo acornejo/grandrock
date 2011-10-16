@@ -1,5 +1,0 @@
-GRandRock (GTK RandR interface)
-===============================
-
-GRandRock is a rudimenentary (yet useful) tool to change resolutions and
-manage multiple screens using the X RandR extensions (through xrandr).
