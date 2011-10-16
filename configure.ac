@@ -1,12 +1,11 @@
 AC_PREREQ(2.52)
 
-AC_INIT(grandrock, 0.1.0, acornejo@gm*l.com)
+AC_INIT(grandrock, 0.1.0, acornejo@gmail.com)
 AC_CONFIG_SRCDIR(src/grandrock.cc)
 AM_CONFIG_HEADER(src/config.h)
 
 AC_PROG_CXX
 AC_PROG_INSTALL
-AC_STDC_HEADERS
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 

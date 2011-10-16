@@ -7,13 +7,17 @@
 #include <gdk/gdkkeysyms.h>
 #include <glib/gstdio.h>
 
-#include "xrandr-queyr.h"
+#include "xrandr-query.h"
 
 void on_item_click(GtkWidget *item, gpointer data) {
     string *str=(string*)data;
     if (str->find("--mode") == string::npos || \
             gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(item)) == TRUE)
         system(str->c_str());
+}
+
+void destroyPopup(GtkWidget *menu, gpointer data) {
+    printf("destroy\n");
 }
 
 void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
@@ -141,10 +145,6 @@ void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
     g_signal_connect(G_OBJECT(menu), "delete-event", G_CALLBACK(destroyPopup), NULL);
 }
 
-void destroyPopup(GtkWidget *menu, gpointer data) {
-    printf("destroy\n");
-}
-
 static GtkStatusIcon *create_tray_icon() {
         GtkStatusIcon *tray_icon;
 
@@ -156,9 +156,10 @@ static GtkStatusIcon *create_tray_icon() {
                  "popup-menu",
                  G_CALLBACK(popupMenu), NULL);
 
-        GError *gerror = NULL;
-        GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("grandure-dark.png", &gerror);
-        gtk_status_icon_set_from_pixbuf(tray_icon, pixbuf);
+        // GError *gerror = NULL;
+        // GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("grandure-dark.png", &gerror);
+        // gtk_status_icon_set_from_pixbuf(tray_icon, pixbuf);
+        gtk_status_icon_set_from_icon_name(tray_icon, "grandrock");
         gtk_status_icon_set_tooltip_text(tray_icon, "XRandr Applet");
         gtk_status_icon_set_visible(tray_icon, TRUE);
 
@@ -169,6 +170,8 @@ int main(int argc, char **argv) {
         GtkStatusIcon *tray_icon;
 
         gtk_init(&argc, &argv);
+        g_set_application_name("Grandrock");
+        gtk_window_set_default_icon_name("grandrock");
         tray_icon = create_tray_icon();
         gtk_main();
 
