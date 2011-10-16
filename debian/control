@@ -8,7 +8,7 @@ Homepage: https://github.com/acornejo/grandrock
 
 Package: grandrock
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, xrandr
+Depends: ${shlibs:Depends}, ${misc:Depends}, x11-xserver-utils
 Description: GTK RandR interface.
  GRandRock rudimenentary (yet useful) tool to change resolutions and manage
  multiple screens using the X RandR extensions (through xrandr).
