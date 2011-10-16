@@ -27,20 +27,9 @@ echo "Generating configuration files for $PACKAGE, please wait..."
     DIE=1
 }
 
-(intltoolize --version) < /dev/null > /dev/null 2>&1 || {
-    echo
-    echo "You must have intltoolize installed to compile $PACKAGE."
-    echo "Download the appropriate package for your distribution,"
-    echo "or get the source tarball at:"
-    echo
-    echo "    ftp://ftp.gnome.org/pub/gnome/sources/intltool/"
-    DIE=1
-}
 
 [ $DIE -eq 1 ] && exit 1;
 
-echo "  intltoolize --copy --force --automake"
-intltoolize --copy --automake --force
 echo "  aclocal $ACLOCAL_FLAGS"
 aclocal $ACLOCAL_FLAGS
 echo "  autoheader"
