@@ -1,0 +1,14 @@
+Source: grandrock
+Section: x11
+Priority: optional
+Maintainer: Alex Cornejo <acornejo@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libgtk-3-dev | libgtk-2-dev (>= 2.24.0)
+Standards-Version: 3.9.2
+Homepage: https://github.com/acornejo/grandrock
+
+Package: grandrock
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, xrandr
+Description: GTK RandR interface.
+ GRandRock rudimenentary (yet useful) tool to change resolutions and manage
+ multiple screens using the X RandR extensions (through xrandr).

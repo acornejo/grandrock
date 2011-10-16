@@ -10,7 +10,8 @@ void on_item_click(GtkWidget *item, gpointer data) {
     string *str=(string*)data;
     if (str->find("--mode") == string::npos || \
             gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(item)) == TRUE)
-        system(str->c_str());
+        if (system(str->c_str()) == -1)
+            cout << "Warning: Call to xrandr failed." << endl;
 }
 
 void destroyPopup(GtkWidget *menu, gpointer data) {
