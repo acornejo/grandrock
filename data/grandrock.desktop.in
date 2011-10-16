@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Grandrock
+Comment=GTK RandR Tray Control
+Icon=grandrock
+Exec=grandrock
+Terminal=false
+StartupNotify=false
+Type=Application
+Categories=GNOME;GTK;
