@@ -19,10 +19,7 @@ update-icon-cache:
 		echo "***   $(gtk_update_icon_cache)"; \
 	fi
 
-EXTRA_DIST = \
-        $(icon_DATA) \
-        $(svgicon_DATA) \
-		$(desktop_DATA)
+EXTRA_DIST = $(svgicon_DATA) $(desktop_DATA)
 
 CLEANFILES = $(desktop_DATA)
 
