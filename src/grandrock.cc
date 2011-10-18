@@ -1,10 +1,21 @@
 #include <config.h>
 #include <gtk/gtk.h>
-// #include <gdk/gdk.h>
-// #include <gdk/gdkkeysyms.h>
-// #include <glib/gstdio.h>
+#include <string>
+#include <vector>
 
 #include "xrandr-query.h"
+
+using namespace std;
+
+vector<string*> slist;
+GtkWidget *menu = NULL;
+
+// Wrapper to create a strings which are deleted when new menu is created.
+string *newstr(const string &str) {
+    string *ptr = newstr(str);
+    slist.push_back(ptr);
+    return ptr;
+}
 
 void on_item_click(GtkWidget *item, gpointer data) {
     string *str=(string*)data;
@@ -12,10 +23,6 @@ void on_item_click(GtkWidget *item, gpointer data) {
             gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(item)) == TRUE)
         if (system(str->c_str()) == -1)
             cout << "Warning: Call to xrandr failed." << endl;
-}
-
-void destroyPopup(GtkWidget *menu, gpointer data) {
-    printf("destroy\n");
 }
 
 void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
@@ -29,7 +36,16 @@ void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
             activedev.push_back(devices[i]->name);
 
     // Genenerate popup menu
-    GtkWidget *menu = gtk_menu_new();
+    if (menu != NULL) {
+        gtk_widget_destroy(menu);
+        menu = NULL;
+        for (int i=0; i<slist.size(); i++)
+            delete slist[i];
+        slist.clear();
+    }
+    menu = gtk_menu_new();
+
+    // Generate popup menu using device info
     vector<device_t*>::iterator dev = devices.begin();
     while (dev != devices.end()) {
         GtkWidget *dev_item = gtk_check_menu_item_new_with_label((*dev)->name.c_str());
@@ -40,7 +56,7 @@ void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
 
             g_signal_connect(G_OBJECT(dev_item), "toggled",
                     G_CALLBACK(on_item_click),
-                    new string(prefix+" --off"));
+                    newstr(prefix+" --off"));
 
             vector<string>::iterator res = (*dev)->reslist.begin();
             GSList *group = NULL;
@@ -54,7 +70,7 @@ void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
                     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(devres),TRUE);
                 g_signal_connect(G_OBJECT(devres), "toggled",
                         G_CALLBACK(on_item_click),
-                        new string(prefix + " --mode "+*res));
+                        newstr(prefix + " --mode "+*res));
                 res++;
             }
 
@@ -103,19 +119,19 @@ void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
                         gtk_menu_shell_append(GTK_MENU_SHELL(clone_menu), clonedev);
                         g_signal_connect(G_OBJECT(leftdev), "activate",
                                 G_CALLBACK(on_item_click),
-                                new string(prefix + " --left-of "+activedev[i]));
+                                newstr(prefix + " --left-of "+activedev[i]));
                         g_signal_connect(G_OBJECT(rightdev), "activate",
                                 G_CALLBACK(on_item_click),
-                                new string(prefix + " --right-of "+activedev[i]));
+                                newstr(prefix + " --right-of "+activedev[i]));
                         g_signal_connect(G_OBJECT(abovedev), "activate",
                                 G_CALLBACK(on_item_click),
-                                new string(prefix + " --above "+activedev[i]));
+                                newstr(prefix + " --above "+activedev[i]));
                         g_signal_connect(G_OBJECT(belowdev), "activate",
                                 G_CALLBACK(on_item_click),
-                                new string(prefix + " --below "+activedev[i]));
+                                newstr(prefix + " --below "+activedev[i]));
                         g_signal_connect(G_OBJECT(clonedev), "activate",
                                 G_CALLBACK(on_item_click),
-                                new string(prefix + " --same-as "+activedev[i]));
+                                newstr(prefix + " --same-as "+activedev[i]));
                     }
                 }
                 gtk_menu_shell_append(GTK_MENU_SHELL(menu), pos_item);
@@ -123,7 +139,7 @@ void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
         } else {
             g_signal_connect(G_OBJECT(dev_item), "activate",
                     G_CALLBACK(on_item_click),
-                    new string(prefix + " --auto"));
+                    newstr(prefix + " --auto"));
         }
         dev++;
         if (dev != devices.end())
@@ -139,8 +155,6 @@ void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
     gtk_widget_show_all(menu);
 
     gtk_menu_popup(GTK_MENU(menu), NULL, NULL, gtk_status_icon_position_menu, icon, button, gtk_get_current_event_time());
-
-    g_signal_connect(G_OBJECT(menu), "delete-event", G_CALLBACK(destroyPopup), NULL);
 }
 
 static GtkStatusIcon *create_tray_icon() {
@@ -154,9 +168,6 @@ static GtkStatusIcon *create_tray_icon() {
                  "popup-menu",
                  G_CALLBACK(popupMenu), NULL);
 
-        // GError *gerror = NULL;
-        // GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("grandure-dark.png", &gerror);
-        // gtk_status_icon_set_from_pixbuf(tray_icon, pixbuf);
         gtk_status_icon_set_from_icon_name(tray_icon, "grandrock");
         gtk_status_icon_set_tooltip_text(tray_icon, "XRandr Applet");
         gtk_status_icon_set_visible(tray_icon, TRUE);
