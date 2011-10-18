@@ -17,6 +17,7 @@ string *newstr(const string &str) {
     return ptr;
 }
 
+// When a item of the popup menu is clicked, we execute the corresponding command.
 void on_item_click(GtkWidget *item, gpointer data) {
     string *str=(string*)data;
     if (str->find("--mode") == string::npos || \
@@ -25,6 +26,7 @@ void on_item_click(GtkWidget *item, gpointer data) {
             cout << "Warning: Call to xrandr failed." << endl;
 }
 
+// Generate and display popup menu
 void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
     // Query XRANDR for device info
     vector<device_t*> devices = getdevices();
@@ -35,7 +37,7 @@ void popupMenu(GtkStatusIcon *icon, guint button, guint32 time, gpointer data) {
         if (devices[i]->curres.size() > 0)
             activedev.push_back(devices[i]->name);
 
-    // Genenerate popup menu
+    // Create new popup menu (delete old one if existed).
     if (menu != NULL) {
         gtk_widget_destroy(menu);
         menu = NULL;
