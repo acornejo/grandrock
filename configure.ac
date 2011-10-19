@@ -1,6 +1,6 @@
 AC_PREREQ(2.52)
 
-AC_INIT(grandrock, 0.1.0, acornejo@gmail.com)
+AC_INIT(grandrock, 0.2, acornejo@gmail.com)
 AC_CONFIG_SRCDIR(src/grandrock.cc)
 AC_CONFIG_HEADERS(src/config.h)
 
