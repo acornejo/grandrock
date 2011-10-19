@@ -12,7 +12,7 @@ GtkWidget *menu = NULL;
 
 // Wrapper to create a strings which are deleted when new menu is created.
 string *newstr(const string &str) {
-    string *ptr = newstr(str);
+    string *ptr = new string(str);
     slist.push_back(ptr);
     return ptr;
 }
