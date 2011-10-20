@@ -25,6 +25,7 @@ vector<device_t *> getdevices() {
     pclose(fp);
     istringstream ibuffer (buffer,istringstream::in);
 
+    // Parse output of xrandr into list of devices
     string line;
     device_t *curdevice=NULL;
     while (getline(ibuffer, line)) {

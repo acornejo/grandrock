@@ -1,8 +1,10 @@
-grandrock (0.1-1ubuntu2) oneiric; urgency=low
+grandrock (0.2) oneiric; urgency=low
 
   * Fixed dependencies 
+  * Added memory management
+  * Fixed icon installation
 
- -- Alex Cornejo <acornejo@gmail.com>  Sun, 16 Oct 2011 17:01:40 -0400
+ -- Alex Cornejo <acornejo@strix>  Wed, 19 Oct 2011 14:50:45 -0400
 
 grandrock (0.1-1ubuntu1) oneiric; urgency=low
 
