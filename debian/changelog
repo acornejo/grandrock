@@ -1,1 +1,27 @@
-../ChangeLog
+grandrock (0.21) oneiric; urgency=low
+  
+  * Used symlink for changelog.
+
+ -- Alex Cornejo <acornejo@gmail.com>  Sat, 18 Feb 2011 14:50:45 -0400
+
+grandrock (0.2) oneiric; urgency=low
+
+  * Fixed dependencies 
+  * Added memory management
+  * Fixed icon installation
+
+ -- Alex Cornejo <acornejo@gmail.com>  Wed, 19 Oct 2011 14:50:45 -0400
+
+grandrock (0.1-1ubuntu1) oneiric; urgency=low
+
+  * Changed autogen to use --copy (for launchpad)
+
+ -- Alex Cornejo <acornejo@gmail.com>  Sun, 16 Oct 2011 15:53:05 -0400
+
+grandrock (0.1-1) oneiric; urgency=low
+
+  * Initial Release.
+
+  * Changed changelog to upload to launchpad.
+
+ -- Alex Cornejo <acornejo@gmail.com>  Sun, 16 Oct 2011 05:14:05 -0400

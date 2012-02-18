@@ -18,5 +18,5 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  data/Makefile
                  data/grandrock.desktop])
-AC_CONFIG_COMMANDS([default], [[ echo timestamp > stamp-h ]], [[]])
+AC_CONFIG_COMMANDS([default], [[ echo timestamp > stamp-h; cp ChangeLog debian/changelog ]], [[]])
 AC_OUTPUT
