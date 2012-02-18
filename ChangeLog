@@ -1,3 +1,9 @@
+grandrock (0.21) oneiric; urgency=low
+  
+  * Used symlink for changelog.
+
+ -- Alex Cornejo <acornejo@gmail.com>  Sat, 18 Feb 2011 14:50:45 -0400
+
 grandrock (0.2) oneiric; urgency=low
 
   * Fixed dependencies 
